@@ -1,0 +1,162 @@
+ /* ===== auth.css ===== */
+
+/* wrapper centers on large screens and provides scroll on small screens */
+.auth-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;     /* center horizontally */
+  align-items: center;         /* center vertically on large screens */
+  padding: 40px 20px;
+  background: var(--bg);
+}
+
+/* auth card */
+.auth-box {
+  width: 100%;
+  max-width: 420px;            /* desktop card width */
+  background: var(--card);
+  border: 1px solid #e6e6e6;
+  padding: 36px 34px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+  position: relative;
+  overflow: visible;
+}
+
+/* Logo / Brand */
+.brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 48px;
+  margin: 0 0 18px;
+  color: #222;
+  line-height: 1;
+}
+/* FIX: Tinglee title thickness reduce */
+.brand {
+  font-weight: 400 !important;   /* lighter – looks like Instagram */
+  letter-spacing: 0.5px;
+}
+/* inputs and selects — smaller height */
+.auth-box .field {
+  width: 100%;
+  padding: 10px 12px;     /* was 13px 14px → reduced */
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  background: var(--input-bg);
+  margin-top: 10px;       /* was 12px */
+  font-size: 14px;        /* was 15px */
+  color: #333;
+  outline: none;
+}
+ 
+
+/* right-aligned small link (forgot) */
+.forgot-password {
+  text-align: right;
+  font-size: 13px;
+  margin-top: 8px;
+  color: #666;
+}
+
+/* primary button (blue) */
+.primary-btn {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+/* OR divider */
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  margin: 20px 0 12px;
+}
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e6e6e6;
+}
+
+/* social buttons row */
+.social-row {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* social button style: white background with border (like Instagram) */
+.social-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  cursor: pointer;
+}
+
+/* small icon container inside social button */
+.social-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* bottom link */
+.bottom-line {
+  margin-top: 18px;
+  font-size: 15px;
+  color: #222;
+}
+.bottom-line .link {
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+/* make the card scrollable on small devices (avoid bottom being hidden) */
+@media (max-width: 480px) {
+  .auth-wrapper {
+    align-items: flex-start;    /* allow top start and natural scroll */
+    padding-top: 24px;
+    padding-bottom: 80px;       /* room for mobile chrome UI */
+  }
+  .auth-box {
+    max-width: 100%;
+    padding: 28px 20px;
+  }
+  .brand { font-size: 40px; margin-bottom: 14px; }
+  .primary-btn { font-size: 16px; }
+  .social-row { gap: 12px; flex-direction: row; }
+}
+
+/* force button focus outline to be discrete */
+.primary-btn:focus, .social-btn:focus { outline: 2px solid rgba(0,149,246,0.12); outline-offset: 2px; }
+/* Fix Apple icon visibility */
+ .social-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #000;        /* makes Apple icon visible */
+}

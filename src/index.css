@@ -1,0 +1,26 @@
+ /* Import the Pacifico font for the logo */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+:root {
+  --bg: #fafafa;
+  --card: #fff;
+  --muted: #8e8e8e;
+  --primary: #0095f6; /* Instagram like blue */
+  --input-bg: #fafafa;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #222;
+}

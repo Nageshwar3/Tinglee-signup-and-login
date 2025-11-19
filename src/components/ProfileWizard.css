@@ -1,0 +1,208 @@
+/* Dark theme - global */
+.profile-wizard.outer {
+  min-height: 100vh;
+  padding: 18px;
+  box-sizing: border-box;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #0b1220;
+  color: #e6eef8;
+}
+
+/* Header */
+.wizard-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.wizard-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  flex: 1;
+  text-align: center;
+}
+.back-btn {
+  background: rgba(255,255,255,0.03);
+  border: none;
+  font-size: 20px;
+  color: #cfeaff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.header-spacer { width: 36px; }
+
+/* Progress */
+.progress-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  align-items: center;
+  justify-content: center;
+}
+.prog { height: 6px; width: 28%; background: rgba(255,255,255,0.06); border-radius: 6px; transition: all .25s; }
+.prog.active { background: #2f80ed; transform: scaleY(1.02); }
+
+/* Body card */
+.wizard-body {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 14px;
+  padding: 18px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(10,15,22,0.85), rgba(8,12,18,0.95));
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* Section titles */
+.section-title {
+  margin: 4px 0 14px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f3f8ff;
+}
+
+/* Photo grid - single main style */
+.photo-grid {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.photo-grid.single {
+  justify-content: center;
+}
+.photo-box {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255,255,255,0.04);
+}
+ .photo-box.main.single-main {
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; /* center photo box */
+}
+
+/* add placeholder */
+.add-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(200,210,220,0.9);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.add-placeholder input[type="file"] { display: none; }
+.add-placeholder .plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 36px;
+  width: 78px;
+  height: 78px;
+  background: rgba(255,255,255,0.02);
+  color: rgba(200,210,220,0.95);
+}
+.add-placeholder .hint { font-size: 14px; color: rgba(200,210,220,0.75); }
+
+/* photo wrap */
+.photo-wrap { position: relative; width: 100%; height: 100%; display: flex; }
+.photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-wrap .remove.small {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: rgba(255,69,96,0.95);
+  border: none;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* inputs */
+.label { display: block; margin: 12px 0 6px; font-weight: 600; color: #dfefff; }
+.input, .textarea {
+  width: 100%;
+  border-radius: 10px;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+  color: #e6eef8;
+}
+.textarea { min-height: 88px; resize: vertical; }
+
+/* location */
+.location-controls { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; }
+.location-controls .toggle { display: flex; gap: 8px; align-items: center; }
+.location-controls .detect { padding: 8px 10px; border-radius: 8px; background: #2f80ed; border: none; color: white; cursor: pointer; }
+
+/* photos strip (step 2) */
+.strip-photos { margin: 8px 0 14px; }
+.photos-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.thumb { width: 90px; height: 90px; border-radius: 10px; overflow: hidden; flex: 0 0 auto; position: relative; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb-actions { position: absolute; bottom: 6px; left: 6px; display:flex; gap:6px; }
+.thumb.add-thumb { display:flex; align-items:center; justify-content:center; border: 2px dashed rgba(255,255,255,0.03); }
+.thumb.add-thumb input[type="file"]{ display:none; }
+
+/* chips & interests */
+.interests-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; align-items:center; }
+.chip { background: rgba(47,128,237,0.12); padding:8px 12px; border-radius:20px; display:flex; gap:8px; align-items:center; color:#cfeaff; }
+.add-chip { display:flex; gap:8px; align-items:center; padding:6px; background:transparent; border:1px dashed rgba(255,255,255,0.04); border-radius:18px; }
+.add-chip input { border: none; background: transparent; color: #e6eef8; outline: none; padding:6px; }
+
+/* prompts */
+.prompts input { display:block; width:100%; margin-bottom:8px; }
+
+/* step actions */
+.step-actions { display:flex; gap:12px; justify-content: space-between; margin-top: 16px; }
+.btn { padding: 12px 16px; border-radius: 10px; border:none; cursor:pointer; font-weight:600; }
+.btn.primary { background: #2f80ed; color: white; }
+.btn.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.04); color: #e6eef8; }
+
+/* Edit grid */
+.photo-grid.edit { gap: 8px; flex-wrap: wrap; }
+.edit-photo { width: 100px; height: 100px; border-radius: 12px; overflow:hidden; position:relative; }
+.edit-actions { position:absolute; bottom:6px; left:6px; display:flex; gap:6px; }
+
+/* responsive */
+@media (max-width: 720px) {
+  .photo-box.main.single-main { max-width: 92%; height: 340px; }
+  .photos-scroll { padding-left: 6px; }
+  .thumb { width: 72px; height: 72px; }
+  .wizard-body { padding: 14px; border-radius: 12px; }
+}
+
+@media (max-width: 420px) {
+  .wizard-header h1 { font-size: 18px; }
+  .add-placeholder .plus { width: 64px; height: 64px; font-size: 32px; }
+} 
+/* ===========================
+   MOBILE RESPONSIVE (Step 1)
+   =========================== */
+@media (max-width: 480px) {
+  .photo-box.main.single-main {
+    width: 200px;
+    height: 200px;
+  }
+}
