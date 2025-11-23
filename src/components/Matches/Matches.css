@@ -1,0 +1,138 @@
+.matches-container {
+    padding: 20px;
+    padding-bottom: 80px;
+    overflow-y: auto;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 24px 0 16px;
+}
+
+/* New Matches - Horizontal Scroll */
+.new-matches-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.new-matches-scroll::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.new-match-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+    cursor: pointer;
+}
+
+.match-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--primary);
+    padding: 2px;
+    /* Gap between border and image */
+    background: var(--bg-card);
+}
+
+.match-avatar-large img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.match-name-small {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Messages List */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.message-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.message-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.message-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.message-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message-content {
+    flex: 1;
+    min-width: 0;
+    /* For text truncation */
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.message-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
+
+.message-time {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.message-preview {
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.unread-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    margin-left: 8px;
+}
