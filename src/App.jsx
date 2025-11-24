@@ -1,26 +1,27 @@
- import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Login";
-import Profile from "./Profile";
-import ProtectedRoute from "./ProtectedRoute";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import ProfileWizard from "./components/ProfileWizard";
+import Discovery from "./components/Discovery/Discovery";
 
-function App() {
+import Likes from "./components/Likes/Likes";
+import Matches from "./components/Matches/Matches";
+
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-        {/* Protected Route */}
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+      {/* ADD THIS */}
+      <Route path="/profile-wizard" element={<ProfileWizard />} />
+      <Route path="/discovery" element={<Discovery />} />
+      <Route path="/likes" element={<Likes />} />
+      <Route path="/matches" element={<Matches />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
   );
 }
 
-export default App;
