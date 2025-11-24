@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 
@@ -10,6 +10,7 @@ export default function Login() {
   function handleLogin(e) {
     e.preventDefault();
     alert("Login Successful");
+    navigate("/discovery");
   }
 
   return (
@@ -60,4 +61,3 @@ export default function Login() {
     </div>
   );
 }
- 

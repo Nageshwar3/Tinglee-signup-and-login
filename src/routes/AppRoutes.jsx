@@ -1,17 +1,13 @@
- import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
+ import { Navigate } from "react-router-dom";
 
-function AppRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
-  );
-}
+const ProtectedRoute = ({ children }) => {
+  const isLoggedIn = localStorage.getItem("loggedIn");
 
-export default AppRoutes;
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
+export default ProtectedRoute;
  
