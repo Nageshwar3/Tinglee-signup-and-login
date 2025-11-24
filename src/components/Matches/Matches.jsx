@@ -47,7 +47,7 @@ const Matches = () => {
                 <div className="section-title">Messages</div>
                 <div className="messages-list">
                     {messages.map(msg => (
-                        <div key={msg.id} className="message-item">
+                        <div key={msg.id} className="message-item" onClick={() => navigate(`/chat/${msg.id}`)} style={{ cursor: 'pointer' }}>
                             <div className="message-avatar">
                                 <img src={msg.img} alt={msg.name} />
                             </div>

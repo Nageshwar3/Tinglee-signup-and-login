@@ -26,7 +26,8 @@ const Discovery = () => {
             prompts: [
                 { question: 'Most favourite AR Rahman track', answer: 'is hmmm, idk how does one choose?' }
             ],
-            isMatch: false
+            isMatch: false,
+            maritalStatus: 'Single'
         },
         {
             id: 1,
@@ -46,7 +47,8 @@ const Discovery = () => {
                 { question: 'My most irrational fear', answer: 'Running out of coffee on a Monday morning.' },
                 { question: 'I get way too excited about', answer: 'Finding a new hiking trail with a view.' }
             ],
-            isMatch: false
+            isMatch: false,
+            maritalStatus: 'Single'
         },
         {
             id: 2,
@@ -65,7 +67,8 @@ const Discovery = () => {
                 { question: 'My simple pleasure', answer: 'Late night coding with lo-fi beats.' },
                 { question: 'Best travel story', answer: 'Getting lost in Tokyo and finding the best ramen ever.' }
             ],
-            isMatch: true
+            isMatch: true,
+            maritalStatus: 'Divorced'
         },
         {
             id: 3,
@@ -82,7 +85,8 @@ const Discovery = () => {
             prompts: [
                 { question: 'I take pride in', answer: 'My vinyl collection.' }
             ],
-            isMatch: false
+            isMatch: false,
+            maritalStatus: 'Single'
         },
         {
             id: 4,
@@ -97,7 +101,8 @@ const Discovery = () => {
             location: 'Queens, NY',
             interests: ['Music', 'Travel', 'Adventure', 'Guitar', 'Concerts'],
             prompts: [],
-            isMatch: false
+            isMatch: false,
+            maritalStatus: 'Separated'
         },
         {
             id: 5,
@@ -112,7 +117,8 @@ const Discovery = () => {
             location: 'Brooklyn, NY',
             interests: ['Yoga', 'Reading', 'Nature', 'Meditation', 'Tea'],
             prompts: [],
-            isMatch: true
+            isMatch: true,
+            maritalStatus: 'Widowed'
         },
         {
             id: 6,
@@ -127,7 +133,8 @@ const Discovery = () => {
             location: 'Manhattan, NY',
             interests: ['Cooking', 'Food', 'Wine', 'Dining', 'Travel'],
             prompts: [],
-            isMatch: false
+            isMatch: false,
+            maritalStatus: 'Single'
         },
         {
             id: 7,
@@ -142,7 +149,8 @@ const Discovery = () => {
             location: 'Jersey City, NJ',
             interests: ['Photography', 'Nature', 'Art', 'Fashion', 'Design'],
             prompts: [],
-            isMatch: false
+            isMatch: false,
+            maritalStatus: 'Single'
         }
     ]);
 
@@ -156,16 +164,42 @@ const Discovery = () => {
     // Filter State
     const [showFilters, setShowFilters] = useState(false);
     const [filters, setFilters] = useState({
-        maxDistance: 100,
-        ageRange: [18, 50]
+        maxDistance: 500,
+        ageRange: [18, 60],
+        maritalStatus: [] // Empty means all
     });
+
+    // Load filters from localStorage on mount
+    React.useEffect(() => {
+        const savedFilters = localStorage.getItem('tinglee_filters');
+        if (savedFilters) {
+            setFilters(JSON.parse(savedFilters));
+        }
+    }, []);
+
+    // Save filters to localStorage whenever they change
+    React.useEffect(() => {
+        localStorage.setItem('tinglee_filters', JSON.stringify(filters));
+    }, [filters]);
 
     const filteredProfiles = profiles.filter(profile => {
         const distance = parseInt(profile.distance);
-        return distance <= filters.maxDistance &&
-            profile.age >= filters.ageRange[0] &&
-            profile.age <= filters.ageRange[1];
+        const matchesDistance = distance <= filters.maxDistance;
+        const matchesAge = profile.age >= filters.ageRange[0] && profile.age <= filters.ageRange[1];
+        const matchesMarital = filters.maritalStatus.length === 0 || filters.maritalStatus.includes(profile.maritalStatus);
+
+        return matchesDistance && matchesAge && matchesMarital;
     });
+
+    const toggleMaritalStatus = (status) => {
+        setFilters(prev => {
+            const current = prev.maritalStatus;
+            const updated = current.includes(status)
+                ? current.filter(s => s !== status)
+                : [...current, status];
+            return { ...prev, maritalStatus: updated };
+        });
+    };
 
     const handleSwipe = (direction) => {
         setLastDirection(direction);
@@ -204,6 +238,9 @@ const Discovery = () => {
                 <div></div>
                 <h1 className="app-title">Tinglee</h1>
                 <div className="header-right">
+                    <button className="icon-btn" onClick={() => navigate('/love-stories')} title="Love Stories">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </button>
                     <button className="icon-btn filter-icon" onClick={() => setShowFilters(true)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <line x1="4" y1="21" x2="4" y2="14"></line>
@@ -468,11 +505,11 @@ const Discovery = () => {
                             <input
                                 type="range"
                                 min="1"
-                                max="100"
+                                max="500"
                                 value={filters.maxDistance}
                                 onChange={(e) => setFilters({ ...filters, maxDistance: parseInt(e.target.value) })}
                                 className="filter-slider"
-                                style={{ backgroundSize: `${(filters.maxDistance - 1) * 100 / 99}% 100%` }}
+                                style={{ backgroundSize: `${(filters.maxDistance - 1) * 100 / 499}% 100%` }}
                             />
                         </div>
 
@@ -484,8 +521,8 @@ const Discovery = () => {
                             <div className="age-inputs">
                                 <input
                                     type="number"
-                                    min="18"
-                                    max="100"
+                                    min="10"
+                                    max="60"
                                     value={filters.ageRange[0]}
                                     onChange={(e) => setFilters({ ...filters, ageRange: [parseInt(e.target.value), filters.ageRange[1]] })}
                                     className="age-input"
@@ -493,12 +530,29 @@ const Discovery = () => {
                                 <span>-</span>
                                 <input
                                     type="number"
-                                    min="18"
-                                    max="100"
+                                    min="10"
+                                    max="60"
                                     value={filters.ageRange[1]}
                                     onChange={(e) => setFilters({ ...filters, ageRange: [filters.ageRange[0], parseInt(e.target.value)] })}
                                     className="age-input"
                                 />
+                            </div>
+                        </div>
+
+                        <div className="filter-section">
+                            <div className="filter-label-row">
+                                <label>Marital Status</label>
+                            </div>
+                            <div className="marital-status-options">
+                                {['Single', 'Divorced', 'Widowed', 'Separated'].map(status => (
+                                    <button
+                                        key={status}
+                                        className={`marital-chip ${filters.maritalStatus.includes(status) ? 'active' : ''}`}
+                                        onClick={() => toggleMaritalStatus(status)}
+                                    >
+                                        {status}
+                                    </button>
+                                ))}
                             </div>
                         </div>
 

@@ -7,6 +7,10 @@ import Discovery from "./components/Discovery/Discovery";
 
 import Likes from "./components/Likes/Likes";
 import Matches from "./components/Matches/Matches";
+import Chat from "./components/Chat/Chat";
+import LoveStories from "./components/LoveStories/LoveStories";
+import SubmitStory from "./components/LoveStories/SubmitStory";
+import AdminPanel from "./components/Admin/AdminPanel";
 
 export default function App() {
   return (
@@ -20,6 +24,10 @@ export default function App() {
       <Route path="/discovery" element={<Discovery />} />
       <Route path="/likes" element={<Likes />} />
       <Route path="/matches" element={<Matches />} />
+      <Route path="/chat/:id" element={<Chat />} />
+      <Route path="/love-stories" element={<LoveStories />} />
+      <Route path="/submit-story" element={<SubmitStory />} />
+      <Route path="/admin" element={<AdminPanel />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

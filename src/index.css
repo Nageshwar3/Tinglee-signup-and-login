@@ -1,26 +1,41 @@
  /* Import the Pacifico font for the logo */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-:root {
-  --bg: #fafafa;
-  --card: #fff;
-  --muted: #8e8e8e;
-  --primary: #0095f6; /* Instagram like blue */
-  --input-bg: #fafafa;
-}
+ :root {
+   --bg-dark: #0d1117;
+   --bg-card: #161b22;
+   --primary: #ff4b7d;
+   --primary-gradient: linear-gradient(45deg, #ff4b7d, #ff6b6b);
+   --text-main: #ffffff;
+   --text-secondary: #94a3b8;
+   --border-color: #374151;
+   --danger: #ef4444;
+   --star: #3b82f6;
+   --success: #22c55e;
 
-html, body, #root {
-  height: 100%;
-}
+   /* Legacy/Compat variables mapped to dark theme */
+   --bg: var(--bg-dark);
+   --card: var(--bg-card);
+   --muted: var(--text-secondary);
+   --input-bg: var(--bg-card);
+ }
 
-* { box-sizing: border-box; }
+ html,
+ body,
+ #root {
+   height: 100%;
+ }
 
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  font-family: Inter, Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #222;
-}
+ * {
+   box-sizing: border-box;
+ }
+
+ body {
+   margin: 0;
+   padding: 0;
+   background: var(--bg);
+   font-family: Inter, Arial, Helvetica, sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   color: #222;
+ }
