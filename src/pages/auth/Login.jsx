@@ -16,7 +16,9 @@ export default function Login() {
   return (
     <div className="auth-wrapper">
       <div className="auth-box">
-        <h1 className="brand">Tinglee</h1>
+        <div className="brand-container">
+          <img src="/src/assets/tinglee_logo.svg" alt="Tinglee Logo" className="brand-logo" />
+        </div>
 
         <form onSubmit={handleLogin}>
           <input

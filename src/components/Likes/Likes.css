@@ -1,3 +1,27 @@
+/* Likes Page Specific Styles */
+
+/* Page Background */
+.likes-page {
+    background: linear-gradient(135deg, #050505 0%, #1a1016 50%, #2d1b2e 100%);
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.likes-page .discovery-header {
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header Title Neon Accent */
+.likes-page .app-title {
+    text-shadow: 0 0 10px rgba(255, 75, 125, 0.5), 0 0 20px rgba(255, 75, 125, 0.3);
+}
+
 .likes-container {
     padding: 20px;
     padding-bottom: 80px;
@@ -5,88 +29,121 @@
     overflow-y: auto;
     height: 100vh;
     box-sizing: border-box;
+    width: 100%;
 }
 
-.likes-header-banner {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 24px;
-    text-align: center;
-    color: #000;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-}
-
-.likes-header-banner h2 {
-    margin: 0 0 8px;
-    font-size: 20px;
-    font-weight: 800;
-}
-
-.likes-header-banner p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    opacity: 0.8;
-}
-
+/* Grid Layout */
 .likes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    /* Force 2 columns for mobile look, or auto-fill */
+    gap: 16px;
+    /* Elegant spacing */
+    padding-top: 10px;
 }
 
+@media (min-width: 600px) {
+    .likes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+/* Premium Card Styling */
 .like-card {
-    background-color: var(--bg-card);
-    border-radius: 16px;
+    background-color: rgba(30, 30, 35, 0.6);
+    border-radius: 20px;
+    /* Rounded corners */
     overflow: hidden;
     position: relative;
     aspect-ratio: 3/4;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    /* Smooth shadow */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Subtle border */
+    cursor: pointer;
 }
 
 .like-card:hover {
-    transform: scale(1.02);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px -10px rgba(255, 75, 125, 0.3);
+    /* Soft glow effect on hover */
+    border-color: rgba(255, 75, 125, 0.5);
+    /* Neon accent border on hover */
 }
 
 .like-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s ease;
 }
 
+.like-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Glassmorphism Overlay */
 .like-card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 12px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+    backdrop-filter: blur(2px);
+    /* Subtle blur at the bottom */
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
 }
 
 .like-card-name {
     color: white;
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .like-card-age {
-    color: var(--text-secondary);
-    font-size: 14px;
-    margin-left: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 2px;
 }
 
+/* Neon/Gold Badge */
 .gold-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    /* Glassmorphism highlight */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
     color: #FFD700;
-    border: 1px solid rgba(255, 215, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+    /* Soft glow */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 5;
+}
+
+/* Scrollbar styling for the container */
+.likes-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.likes-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.likes-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }

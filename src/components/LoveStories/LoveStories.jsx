@@ -6,6 +6,7 @@ import './LoveStories.css';
 const LoveStories = () => {
     const navigate = useNavigate();
     const [stories, setStories] = useState([]);
+    const [selectedStory, setSelectedStory] = useState(null);
 
     useEffect(() => {
         // Load stories from localStorage
@@ -40,8 +41,16 @@ const LoveStories = () => {
         }
     }, []);
 
+    const openStory = (story) => {
+        setSelectedStory(story);
+    };
+
+    const closeStory = () => {
+        setSelectedStory(null);
+    };
+
     return (
-        <div className="stories-container">
+        <div className="stories-container love-stories-page">
             <header className="stories-header">
                 <button className="back-btn" onClick={() => navigate('/discovery')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -54,7 +63,7 @@ const LoveStories = () => {
 
             <div className="stories-grid">
                 {stories.map(story => (
-                    <div key={story.id} className="story-card">
+                    <div key={story.id} className="story-card" onClick={() => openStory(story)} style={{ cursor: 'pointer' }}>
                         <div className="story-image">
                             <img src={story.image} alt={story.couple} />
                         </div>
@@ -66,6 +75,24 @@ const LoveStories = () => {
                     </div>
                 ))}
             </div>
+
+            {selectedStory && (
+                <div className="story-modal-overlay" onClick={closeStory}>
+                    <div className="story-modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="close-modal-btn" onClick={closeStory}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                        <div className="modal-image">
+                            <img src={selectedStory.image} alt={selectedStory.couple} />
+                        </div>
+                        <div className="modal-details">
+                            <h2>{selectedStory.couple}</h2>
+                            <p className="modal-date">{selectedStory.date}</p>
+                            <p className="modal-text">{selectedStory.story}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <div className="admin-link-container">
                 <button className="text-link" onClick={() => navigate('/admin')}>Admin Panel (Demo)</button>

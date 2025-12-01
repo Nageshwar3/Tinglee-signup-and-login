@@ -26,18 +26,17 @@
 }
 
 /* Logo / Brand */
-.brand {
-  font-family: 'Pacifico', cursive;
-  font-size: 48px;
-  margin: 0 0 18px;
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: var(--primary);
-  line-height: 1.2;
-  font-weight: 400 !important;
-  letter-spacing: 0.5px;
+.brand-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.brand-logo {
+  height: 50px;
+  width: auto;
+  display: block;
 }
 
 /* inputs and selects */

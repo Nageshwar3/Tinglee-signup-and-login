@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Discovery/Discovery.css';
 import './Matches.css';
 
 const Matches = () => {
     const navigate = useNavigate();
+    const [showSearch, setShowSearch] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const newMatches = [
         { id: 1, name: "Chloe", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
@@ -21,20 +23,38 @@ const Matches = () => {
     ];
 
     return (
-        <div className="discovery-container">
+        <div className="discovery-container matches-page">
             <header className="discovery-header">
-                <h1 className="app-title">Matches</h1>
+                {showSearch ? (
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Search matches..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        autoFocus
+                    />
+                ) : (
+                    <h1 className="app-title">Matches</h1>
+                )}
                 <div className="header-right">
-                    <button className="icon-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <button className="icon-btn" onClick={() => {
+                        setShowSearch(!showSearch);
+                        if (showSearch) setSearchQuery(''); // Clear search when closing
+                    }}>
+                        {showSearch ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        )}
                     </button>
                 </div>
             </header>
 
             <div className="matches-container">
-                <div className="section-title">New Matches <span>{newMatches.length}</span></div>
+                <div className="section-title">New Matches <span>{newMatches.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase())).length}</span></div>
                 <div className="new-matches-scroll">
-                    {newMatches.map(match => (
+                    {newMatches.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase())).map(match => (
                         <div key={match.id} className="new-match-item">
                             <div className="match-avatar-large">
                                 <img src={match.img} alt={match.name} />
@@ -46,7 +66,7 @@ const Matches = () => {
 
                 <div className="section-title">Messages</div>
                 <div className="messages-list">
-                    {messages.map(msg => (
+                    {messages.filter(msg => msg.name.toLowerCase().includes(searchQuery.toLowerCase()) || msg.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())).map(msg => (
                         <div key={msg.id} className="message-item" onClick={() => navigate(`/chat/${msg.id}`)} style={{ cursor: 'pointer' }}>
                             <div className="message-avatar">
                                 <img src={msg.img} alt={msg.name} />

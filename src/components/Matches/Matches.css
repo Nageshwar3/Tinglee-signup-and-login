@@ -1,24 +1,80 @@
+/* Matches Page Specific Styles */
+
+/* Page Background */
+.matches-page {
+    background: linear-gradient(135deg, #050505 0%, #1a1016 50%, #2d1b2e 100%);
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.matches-page .discovery-header {
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header Title Neon Accent */
+.matches-page .app-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    text-shadow: none;
+    margin: 12px 0;
+}
+
 .matches-container {
     padding: 20px;
     padding-bottom: 80px;
     overflow-y: auto;
     height: 100vh;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .section-title {
     font-size: 18px;
     font-weight: 700;
-    color: var(--text-main);
-    margin: 24px 0 16px;
+    color: #ffffff;
+    margin: 14px 0 10px;
+    letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title span {
+    color: #FFD700;
+    font-size: 14px;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Stronger rule to prevent overrides from global styles */
+.matches-page .section-title {
+    font-size: 18px !important;
+    margin: 12px 0 8px !important;
+}
+
+/* Make headings slightly smaller on narrow screens */
+@media (max-width: 420px) {
+    .matches-page .section-title {
+        font-size: 16px !important;
+        margin: 10px 0 8px !important;
+    }
 }
 
 /* New Matches - Horizontal Scroll */
 .new-matches-scroll {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     overflow-x: auto;
-    padding-bottom: 10px;
+    padding-bottom: 16px;
     scrollbar-width: none;
     /* Firefox */
 }
@@ -33,19 +89,34 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    min-width: 80px;
+    min-width: 72px;
     cursor: pointer;
+    transition: transform 0.18s ease;
+}
+
+.new-match-item:hover {
+    transform: translateY(-5px);
 }
 
 .match-avatar-large {
-    width: 80px;
-    height: 80px;
+    width: 66px;
+    height: 66px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--primary);
+    border: 2px solid rgba(255, 75, 125, 0.9);
     padding: 2px;
-    /* Gap between border and image */
-    background: var(--bg-card);
+    background: transparent;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    position: relative;
+}
+
+.match-avatar-large::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
 }
 
 .match-avatar-large img {
@@ -56,39 +127,46 @@
 }
 
 .match-name-small {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
-    color: white;
+    color: #ffffff;
+    text-shadow: none;
 }
 
 /* Messages List */
 .messages-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
 .message-item {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     padding: 12px;
-    background-color: var(--bg-card);
-    border-radius: 16px;
+    background-color: rgba(20, 20, 24, 0.55);
+    border-radius: 14px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.18s ease;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(4px);
 }
 
 .message-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateX(4px);
+    border-color: rgba(255, 75, 125, 0.18);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .message-avatar {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.06);
 }
 
 .message-avatar img {
@@ -111,28 +189,287 @@
 }
 
 .message-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: white;
+    font-size: 13px;
+    /* reduced name size for messages */
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.2px;
 }
 
 .message-time {
     font-size: 12px;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
 }
 
 .message-preview {
-    font-size: 14px;
-    color: var(--text-secondary);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.3;
 }
 
 .unread-dot {
     width: 10px;
     height: 10px;
-    background-color: var(--primary);
+    background-color: #ff4b7d;
     border-radius: 50%;
     margin-left: 8px;
+    box-shadow: 0 0 10px #ff4b7d;
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 75, 125, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(255, 75, 125, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 75, 125, 0);
+    }
+}
+
+/* Scrollbar styling for the container */
+.matches-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.matches-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.matches-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* Force compact name sizes with higher specificity in case of overrides */
+/* Stronger rule to prevent overrides from global styles */
+.matches-page .section-title {
+    font-size: 18px !important;
+    margin: 12px 0 8px !important;
+}
+
+/* Make headings slightly smaller on narrow screens */
+@media (max-width: 420px) {
+    .matches-page .section-title {
+        font-size: 16px !important;
+        margin: 10px 0 8px !important;
+    }
+}
+
+/* New Matches - Horizontal Scroll */
+.new-matches-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.new-matches-scroll::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.new-match-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 72px;
+    cursor: pointer;
+    transition: transform 0.18s ease;
+}
+
+.new-match-item:hover {
+    transform: translateY(-5px);
+}
+
+.match-avatar-large {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 75, 125, 0.9);
+    padding: 2px;
+    background: transparent;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    position: relative;
+}
+
+.match-avatar-large::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.match-avatar-large img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.match-name-small {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+/* Messages List */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    background-color: rgba(20, 20, 24, 0.55);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(4px);
+}
+
+.message-item:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateX(4px);
+    border-color: rgba(255, 75, 125, 0.18);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.message-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.06);
+}
+
+.message-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message-content {
+    flex: 1;
+    min-width: 0;
+    /* For text truncation */
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.message-name {
+    font-size: 13px;
+    /* reduced name size for messages */
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.2px;
+}
+
+.message-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+.message-preview {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.unread-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ff4b7d;
+    border-radius: 50%;
+    margin-left: 8px;
+    box-shadow: 0 0 10px #ff4b7d;
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 75, 125, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(255, 75, 125, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 75, 125, 0);
+    }
+}
+
+/* Scrollbar styling for the container */
+.matches-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.matches-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.matches-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* Force compact name sizes with higher specificity in case of overrides */
+.matches-page .new-match-item .match-name-small {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.matches-page .messages-list .message-item .message-header .message-name {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+/* Search Input */
+.search-input {
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 75, 125, 0.2);
 }

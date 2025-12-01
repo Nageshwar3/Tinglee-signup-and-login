@@ -11,11 +11,14 @@ import Chat from "./components/Chat/Chat";
 import LoveStories from "./components/LoveStories/LoveStories";
 import SubmitStory from "./components/LoveStories/SubmitStory";
 import AdminPanel from "./components/Admin/AdminPanel";
+import Settings from "./components/Settings/Settings";
+
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
@@ -28,6 +31,7 @@ export default function App() {
       <Route path="/love-stories" element={<LoveStories />} />
       <Route path="/submit-story" element={<SubmitStory />} />
       <Route path="/admin" element={<AdminPanel />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 
@@ -20,7 +20,9 @@ export default function Register() {
   return (
     <div className="auth-wrapper">
       <div className="auth-box">
-        <h1 className="brand">Tinglee</h1>
+        <div className="brand-container">
+          <img src="/src/assets/tinglee_logo.svg" alt="Tinglee Logo" className="brand-logo" />
+        </div>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -93,4 +95,3 @@ export default function Register() {
     </div>
   );
 }
- 

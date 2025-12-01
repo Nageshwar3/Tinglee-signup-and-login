@@ -1,22 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Discovery/Discovery.css';
 import './Likes.css';
+import ProfileDetails from '../Discovery/ProfileDetails';
 
 const Likes = () => {
     const navigate = useNavigate();
+    const [selectedProfile, setSelectedProfile] = useState(null);
 
     const mockLikes = [
-        { id: 1, name: "Sarah", age: 24, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
-        { id: 2, name: "Jessica", age: 22, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
-        { id: 3, name: "Emily", age: 26, img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
-        { id: 4, name: "Olivia", age: 23, img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
-        { id: 5, name: "Sophia", age: 25, img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
-        { id: 6, name: "Ava", age: 21, img: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" }
+        {
+            id: 1,
+            name: "Sarah",
+            age: 24,
+            img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            distance: '5 km away',
+            location: 'Manhattan, NY',
+            job: 'Student',
+            images: ["https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"],
+            interests: ['Art', 'Food', 'Music'],
+            prompts: [{ question: 'I take pride in', answer: 'My vinyl collection.' }]
+        },
+        {
+            id: 2,
+            name: "Jessica",
+            age: 22,
+            img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            distance: '8 km away',
+            location: 'New York, NY',
+            job: 'Graphic Designer',
+            images: ["https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"],
+            interests: ['Hiking', 'Coffee', 'Travel'],
+            prompts: [{ question: 'My most irrational fear', answer: 'Running out of coffee.' }]
+        },
+        {
+            id: 3,
+            name: "Emily",
+            age: 26,
+            img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            distance: '12 km away',
+            location: 'Brooklyn, NY',
+            job: 'Marketing',
+            images: ["https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"],
+            interests: ['Yoga', 'Reading', 'Wine'],
+            prompts: []
+        },
+        {
+            id: 4,
+            name: "Olivia",
+            age: 23,
+            img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            distance: '10 km away',
+            location: 'Jersey City, NJ',
+            job: 'Photographer',
+            images: ["https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"],
+            interests: ['Photography', 'Nature', 'Art'],
+            prompts: []
+        },
+        {
+            id: 5,
+            name: "Sophia",
+            age: 25,
+            img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            distance: '15 km away',
+            location: 'Queens, NY',
+            job: 'Nurse',
+            images: ["https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"],
+            interests: ['Running', 'Cooking', 'Travel'],
+            prompts: []
+        },
+        {
+            id: 6,
+            name: "Ava",
+            age: 21,
+            img: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+            distance: '3 km away',
+            location: 'Manhattan, NY',
+            job: 'Model',
+            images: ["https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"],
+            interests: ['Fashion', 'Design', 'Art'],
+            prompts: []
+        }
     ];
 
     return (
-        <div className="discovery-container">
+        <div className="discovery-container likes-page">
             <header className="discovery-header">
                 <h1 className="app-title">Likes</h1>
                 <div className="header-right">
@@ -25,14 +93,9 @@ const Likes = () => {
             </header>
 
             <div className="likes-container">
-                <div className="likes-header-banner">
-                    <h2>Upgrade to Gold</h2>
-                    <p>See who likes you and match instantly!</p>
-                </div>
-
                 <div className="likes-grid">
                     {mockLikes.map(profile => (
-                        <div key={profile.id} className="like-card">
+                        <div key={profile.id} className="like-card" onClick={() => setSelectedProfile(profile)}>
                             <img src={profile.img} alt={profile.name} />
                             <div className="like-card-overlay">
                                 <span className="like-card-name">{profile.name}</span>
@@ -43,6 +106,18 @@ const Likes = () => {
                     ))}
                 </div>
             </div>
+
+            {selectedProfile && (
+                <ProfileDetails
+                    profile={selectedProfile}
+                    onClose={() => setSelectedProfile(null)}
+                    onLike={() => {
+                        console.log('Liked from Likes page:', selectedProfile.name);
+                        // Here you could implement match logic
+                    }}
+                    onPass={() => setSelectedProfile(null)}
+                />
+            )}
 
             <nav className="bottom-nav">
                 <button className="nav-item" onClick={() => navigate('/discovery')}>
