@@ -1,149 +1,117 @@
-/* Likes Page Specific Styles */
+/* Likes Page Styling */
 
-/* Page Background */
 .likes-page {
-    background: linear-gradient(135deg, #050505 0%, #1a1016 50%, #2d1b2e 100%);
+    background-color: #0d1117;
     min-height: 100vh;
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
 }
 
-.likes-page .discovery-header {
-    background: transparent;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Header Title Neon Accent */
-.likes-page .app-title {
-    text-shadow: 0 0 10px rgba(255, 75, 125, 0.5), 0 0 20px rgba(255, 75, 125, 0.3);
+.likes-subtitle {
+    padding: 0 20px 20px 20px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
 }
 
 .likes-container {
-    padding: 20px;
-    padding-bottom: 80px;
-    /* Space for bottom nav */
+    flex: 1;
+    padding: 0 16px 100px 16px;
     overflow-y: auto;
-    height: 100vh;
-    box-sizing: border-box;
-    width: 100%;
 }
 
-/* Grid Layout */
 .likes-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Force 2 columns for mobile look, or auto-fill */
-    gap: 16px;
-    /* Elegant spacing */
-    padding-top: 10px;
+    gap: 12px;
 }
 
-@media (min-width: 600px) {
-    .likes-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    }
-}
-
-/* Premium Card Styling */
 .like-card {
-    background-color: rgba(30, 30, 35, 0.6);
-    border-radius: 20px;
-    /* Rounded corners */
-    overflow: hidden;
     position: relative;
     aspect-ratio: 3/4;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    /* Smooth shadow */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    /* Subtle border */
-    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #1e2329;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.like-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 40px -10px rgba(255, 75, 125, 0.3);
-    /* Soft glow effect on hover */
-    border-color: rgba(255, 75, 125, 0.5);
-    /* Neon accent border on hover */
-}
-
-.like-card img {
+.like-card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
 }
 
-.like-card:hover img {
-    transform: scale(1.1);
-}
-
-/* Glassmorphism Overlay */
 .like-card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 16px;
+    padding: 12px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
-    backdrop-filter: blur(2px);
-    /* Subtle blur at the bottom */
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.like-info {
+    display: flex;
+    align-items: center;
     gap: 6px;
 }
 
-.like-card-name {
-    color: white;
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+.like-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.like-card-age {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 2px;
+.like-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
-/* Neon/Gold Badge */
-.gold-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    /* Glassmorphism highlight */
-    padding: 6px 12px;
+.view-profile-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
     border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #FFD700;
-    border: 1px solid rgba(255, 215, 0, 0.4);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
-    /* Soft glow */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 5;
+    padding: 6px 12px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s ease;
 }
 
-/* Scrollbar styling for the container */
-.likes-container::-webkit-scrollbar {
-    width: 6px;
+.view-profile-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.likes-container::-webkit-scrollbar-track {
-    background: transparent;
+.like-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+    transition: transform 0.2s ease;
 }
 
-.likes-container::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+.like-action-btn:hover {
+    transform: scale(1.05);
+}
+
+.like-action-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
 }

@@ -33,15 +33,7 @@ const LandingPage = () => {
                     </p>
                     <div className="hero-ctas">
                         <button className="cta-primary" onClick={() => navigate('/register')}>Create Account</button>
-                        <button className="cta-secondary" onClick={() => navigate('/discovery')}>Continue as Guest</button>
                     </div>
-                </div>
-                <div className="hero-visual">
-                    <img
-                        src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=2548&auto=format&fit=crop"
-                        alt="Digital connection heart"
-                        className="hero-image-glow"
-                    />
                 </div>
             </header>
 

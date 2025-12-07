@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 
+import logo from "../../assets/tinglee_logo.svg";
+
 export default function Login() {
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState("");
@@ -10,14 +12,14 @@ export default function Login() {
   function handleLogin(e) {
     e.preventDefault();
     alert("Login Successful");
-    navigate("/discovery");
+    navigate("/profile-wizard", { state: { view: 1 } });
   }
 
   return (
     <div className="auth-wrapper">
       <div className="auth-box">
         <div className="brand-container">
-          <img src="/src/assets/tinglee_logo.svg" alt="Tinglee Logo" className="brand-logo" />
+          <img src={logo} alt="Tinglee Logo" className="brand-logo" />
         </div>
 
         <form onSubmit={handleLogin}>

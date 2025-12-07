@@ -195,27 +195,38 @@ const Discovery = () => {
     const currentProfile = filteredProfiles[currentIndex];
     const noMoreProfiles = currentIndex >= filteredProfiles.length;
 
+    const handleProfileClick = () => {
+        navigate('/profile-wizard?view=profile');
+    };
+
     return (
         <div className="discovery-container">
             {/* Header */}
             <header className="discovery-header">
                 <h1 className="app-title">Tinglee</h1>
                 <div className="header-icons">
-                    <button className="icon-btn" onClick={() => navigate('/love-stories')} title="Love Stories">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                    </button>
-                    <button className="icon-btn" onClick={() => navigate('/matches')} title="Matches">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                    </button>
-                    <button className="icon-btn" onClick={() => setShowFilters(true)} title="Filters">
+                    <button className="icon-btn" onClick={handleProfileClick} title="Profile">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
                         </svg>
+                        <span>Profile</span>
                     </button>
+                    <button className="icon-btn" onClick={() => navigate('/settings')} title="Settings">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="4" y1="21" x2="4" y2="14"></line>
+                            <line x1="4" y1="10" x2="4" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12" y2="3"></line>
+                            <line x1="20" y1="21" x2="20" y2="16"></line>
+                            <line x1="20" y1="12" x2="20" y2="3"></line>
+                            <line x1="1" y1="14" x2="7" y2="14"></line>
+                            <line x1="9" y1="8" x2="15" y2="8"></line>
+                            <line x1="17" y1="16" x2="23" y2="16"></line>
+                        </svg>
+                        <span>Settings</span>
+                    </button>
+
                 </div>
             </header>
 
@@ -296,6 +307,8 @@ const Discovery = () => {
                 <ProfileDetails profile={currentProfile} onClose={() => setShowDetails(false)} onLike={() => { setShowDetails(false); handleSwipe('right'); }} onPass={() => { setShowDetails(false); handleSwipe('left'); }} />
             )}
 
+
+
             {/* Match Modal */}
             {showMatch && matchedProfile && (
                 <div className="match-modal-overlay">
@@ -360,7 +373,7 @@ const Discovery = () => {
 
             {/* Bottom Navigation */}
             <nav className="bottom-nav">
-                <button className="nav-item active" title="Discover">
+                <button className={`nav-item ${!showDetails && !showMatch && !showFilters ? 'active' : ''}`} onClick={() => { setShowDetails(false); setShowMatch(false); setShowFilters(false); }} title="Discover">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="M21 21l-4.35-4.35"></path>
@@ -379,26 +392,18 @@ const Discovery = () => {
                     </svg>
                     <span>Matches</span>
                 </button>
-                <button className="nav-item" onClick={() => navigate('/profile-wizard')} title="Profile">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    <span>Profile</span>
-                </button>
-                <button className="nav-item" onClick={() => navigate('/settings')} title="Settings">
+                <button className="nav-item" onClick={() => navigate('/messages')} title="Messages">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="4" y1="21" x2="4" y2="14"></line>
-                        <line x1="4" y1="10" x2="4" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12" y2="3"></line>
-                        <line x1="20" y1="21" x2="20" y2="16"></line>
-                        <line x1="20" y1="12" x2="20" y2="3"></line>
-                        <line x1="1" y1="14" x2="7" y2="14"></line>
-                        <line x1="9" y1="8" x2="15" y2="8"></line>
-                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                     </svg>
-                    <span>Settings</span>
+                    <span>Messages</span>
+                </button>
+                <button className="nav-item" onClick={() => navigate('/love-stories')} title="Stories">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Stories</span>
                 </button>
             </nav>
         </div>

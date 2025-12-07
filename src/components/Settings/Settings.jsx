@@ -51,6 +51,10 @@ const IconHelp = () => (
 
 const Settings = () => {
     const navigate = useNavigate();
+    const [distance, setDistance] = React.useState(50);
+    const [ageRange, setAgeRange] = React.useState([18, 35]);
+    const [showMe, setShowMe] = React.useState('women');
+    const [maritalStatus, setMaritalStatus] = React.useState('single');
 
     return (
         <div className="settings-page">
@@ -66,41 +70,119 @@ const Settings = () => {
                 <div className="settings-section">
                     <h2 className="section-label">ACCOUNT</h2>
                     <div className="settings-group">
-                        <div className="settings-item">
+                        <div className="settings-item" onClick={() => navigate('/profile-wizard?view=profile')}>
                             <div className="settings-icon-wrapper pink">
                                 <IconProfile />
                             </div>
                             <span className="settings-text">Profile Settings</span>
                             <IconChevronRight />
                         </div>
-                        <div className="settings-item">
+                        <div className="settings-item" onClick={() => navigate('/settings/notifications')}>
                             <div className="settings-icon-wrapper pink">
                                 <IconBell />
                             </div>
                             <span className="settings-text">Notification Preferences</span>
                             <IconChevronRight />
                         </div>
-                        <div className="settings-item">
+                        <div className="settings-item" onClick={() => navigate('/settings/privacy')}>
                             <div className="settings-icon-wrapper pink">
                                 <IconShield />
                             </div>
                             <span className="settings-text">Privacy Settings</span>
                             <IconChevronRight />
                         </div>
-                        <div className="settings-item">
-                            <div className="settings-icon-wrapper pink">
-                                <IconCard />
-                            </div>
-                            <span className="settings-text">Account Settings</span>
-                            <IconChevronRight />
-                        </div>
                     </div>
                 </div>
 
                 <div className="settings-section">
-                    <h2 className="section-label">SUPPORT</h2>
+                    <h2 className="section-label">DISCOVERY SETTINGS</h2>
+                    <div className="settings-group p-4">
+                        <div className="setting-control">
+                            <div className="control-header">
+                                <span>Maximum Distance</span>
+                                <span className="control-value">{distance}km</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="1"
+                                max="500"
+                                value={distance}
+                                onChange={(e) => setDistance(e.target.value)}
+                                className="settings-slider"
+                                style={{ '--val': `${(distance / 500) * 100}%` }}
+                            />
+                        </div>
+
+                        <div className="setting-control mt-4">
+                            <div className="control-header">
+                                <span>Age Range</span>
+                                <span className="control-value">{ageRange[0]} - {ageRange[1]}</span>
+                            </div>
+                            <div className="age-slider-container">
+                                {/* Simplified Age Range UI for now */}
+                                <div className="age-inputs-row">
+                                    <input
+                                        type="number"
+                                        value={ageRange[0]}
+                                        onChange={(e) => setAgeRange([parseInt(e.target.value), ageRange[1]])}
+                                        className="age-input-box"
+                                    />
+                                    <span>-</span>
+                                    <input
+                                        type="number"
+                                        value={ageRange[1]}
+                                        onChange={(e) => setAgeRange([ageRange[0], parseInt(e.target.value)])}
+                                        className="age-input-box"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="setting-control mt-4">
+                            <div className="control-header">
+                                <span>Show Me</span>
+                            </div>
+                            <div className="toggle-group">
+                                {['Men', 'Women', 'Everyone'].map(option => (
+                                    <button
+                                        key={option}
+                                        className={`toggle-btn ${showMe === option.toLowerCase() ? 'active' : ''}`}
+                                        onClick={() => setShowMe(option.toLowerCase())}
+                                    >
+                                        {option}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="setting-control mt-4">
+                            <div className="control-header">
+                                <span>Marital Status</span>
+                            </div>
+                            <div className="toggle-group" style={{ flexWrap: 'wrap', gap: '8px', background: 'transparent', padding: 0 }}>
+                                {['Single', 'Divorced', 'Widowed', 'Separated'].map(status => (
+                                    <button
+                                        key={status}
+                                        className={`status-chip ${maritalStatus === status.toLowerCase() ? 'active' : ''}`}
+                                        onClick={() => setMaritalStatus(status.toLowerCase())}
+                                    >
+                                        {status}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+
+                        <button className="apply-btn-small" onClick={() => navigate('/discovery')}>
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+
+                <div className="settings-section">
+                    <h2 className="section-label">SUPPORT & LEGAL</h2>
                     <div className="settings-group">
-                        <div className="settings-item">
+                        <div className="settings-item" onClick={() => navigate('/settings/help')}>
                             <div className="settings-icon-wrapper pink">
                                 <IconHelp />
                             </div>
@@ -113,8 +195,12 @@ const Settings = () => {
                 <button className="logout-btn" onClick={() => navigate('/')}>
                     Log Out
                 </button>
-            </div>
-        </div>
+
+                <div className="version-info">
+                    <p>Version 1.0.0</p>
+                </div>
+            </div >
+        </div >
     );
 };
 

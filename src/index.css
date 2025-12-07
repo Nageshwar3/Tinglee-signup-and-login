@@ -30,6 +30,16 @@
    box-sizing: border-box;
  }
 
+ /* Global Scrollbar Hide */
+ ::-webkit-scrollbar {
+   display: none;
+ }
+
+ * {
+   scrollbar-width: none;
+   -ms-overflow-style: none;
+ }
+
  body {
    margin: 0;
    padding: 0;
@@ -38,4 +48,25 @@
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
    color: #222;
+ }
+
+ /* Global fix for date inputs on mobile dark mode */
+ input[type="date"] {
+   color-scheme: dark;
+   min-height: 52px;
+   /* Ensure touch target size */
+   color: var(--text-main);
+   background-color: var(--input-bg);
+ }
+
+ input[type="date"]::-webkit-calendar-picker-indicator {
+   filter: invert(1);
+   cursor: pointer;
+   opacity: 0.7;
+ }
+
+ input[type="date"]::placeholder {
+   color: var(--text-secondary);
+   opacity: 1;
+   /* Firefox */
  }

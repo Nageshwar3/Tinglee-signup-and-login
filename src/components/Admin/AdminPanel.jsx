@@ -55,13 +55,13 @@ const AdminPanel = () => {
                                     <p>{story.story}</p>
                                     <div className="admin-actions">
                                         <button
-                                            className="action-btn approve"
+                                            className="admin-action-btn approve"
                                             onClick={() => handleAction(story.id, 'approved')}
                                         >
                                             Approve
                                         </button>
                                         <button
-                                            className="action-btn reject"
+                                            className="admin-action-btn reject"
                                             onClick={() => handleAction(story.id, 'rejected')}
                                         >
                                             Reject

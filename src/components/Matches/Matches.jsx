@@ -9,78 +9,112 @@ const Matches = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const newMatches = [
-        { id: 1, name: "Chloe", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
-        { id: 2, name: "Bella", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" },
-        { id: 3, name: "Lily", img: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" },
-        { id: 4, name: "Zoe", img: "https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
+        { id: 1, name: "Jessica", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
+        { id: 2, name: "Michael", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
+        { id: 3, name: "Sarah", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" },
+        { id: 4, name: "David", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" },
     ];
 
-    const messages = [
-        { id: 1, name: "Emma", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80", lastMessage: "Hey! How's your weekend going?", time: "2m ago", unread: true },
-        { id: 2, name: "Mia", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", lastMessage: "That sounds amazing! 🤩", time: "1h ago", unread: false },
-        { id: 3, name: "Charlotte", img: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80", lastMessage: "Let's meet up for coffee?", time: "Yesterday", unread: false },
-        { id: 4, name: "Amelia", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", lastMessage: "Haha, you're funny!", time: "2d ago", unread: false },
+    const allMatches = [
+        {
+            id: 1,
+            name: "Jessica",
+            age: 28,
+            bio: "Lover of hiking and good coffee.",
+            img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        },
+        {
+            id: 2,
+            name: "Michael",
+            age: 32,
+            bio: "Exploring the world, one city at a time.",
+            img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        },
+        {
+            id: 3,
+            name: "Sarah",
+            age: 29,
+            bio: "Just looking for my adventure partner.",
+            img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
+        },
+        {
+            id: 4,
+            name: "David",
+            age: 31,
+            bio: "Always down for a good laugh.",
+            img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        },
+        {
+            id: 5,
+            name: "Emily",
+            age: 27,
+            bio: "My dog thinks I'm pretty cool.",
+            img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        },
+        {
+            id: 6,
+            name: "Chris",
+            age: 30,
+            bio: "Fluent in sarcasm and movie quotes.",
+            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+        }
     ];
 
     return (
         <div className="discovery-container matches-page">
             <header className="discovery-header">
-                {showSearch ? (
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Search matches..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        autoFocus
-                    />
-                ) : (
-                    <h1 className="app-title">Matches</h1>
-                )}
-                <div className="header-right">
-                    <button className="icon-btn" onClick={() => {
-                        setShowSearch(!showSearch);
-                        if (showSearch) setSearchQuery(''); // Clear search when closing
-                    }}>
-                        {showSearch ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        )}
-                    </button>
-                </div>
+                <button className="icon-btn" onClick={() => navigate(-1)}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+                <h1 className="app-title">Matches</h1>
+                <button className="icon-btn" onClick={() => navigate('/settings')}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                </button>
             </header>
 
-            <div className="matches-container">
-                <div className="section-title">New Matches <span>{newMatches.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase())).length}</span></div>
+            <div className="matches-content">
+                <div className="section-header">
+                    <h2>New Matches</h2>
+                    <span className="subtitle">Your most recent connections</span>
+                </div>
+
                 <div className="new-matches-scroll">
-                    {newMatches.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase())).map(match => (
-                        <div key={match.id} className="new-match-item">
-                            <div className="match-avatar-large">
+                    {newMatches.map(match => (
+                        <div key={match.id} className="new-match-item" onClick={() => navigate(`/chat/${match.id}`)}>
+                            <div className="match-avatar-circle">
                                 <img src={match.img} alt={match.name} />
+                                <div className="online-dot"></div>
                             </div>
                             <span className="match-name-small">{match.name}</span>
                         </div>
                     ))}
                 </div>
 
-                <div className="section-title">Messages</div>
-                <div className="messages-list">
-                    {messages.filter(msg => msg.name.toLowerCase().includes(searchQuery.toLowerCase()) || msg.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())).map(msg => (
-                        <div key={msg.id} className="message-item" onClick={() => navigate(`/chat/${msg.id}`)} style={{ cursor: 'pointer' }}>
-                            <div className="message-avatar">
-                                <img src={msg.img} alt={msg.name} />
+                <div className="section-header mt-4">
+                    <h2>All Matches</h2>
+                    <span className="subtitle">Tap a card to start a conversation</span>
+                </div>
+
+                <div className="all-matches-grid">
+                    {allMatches.map(match => (
+                        <div key={match.id} className="match-card" onClick={() => navigate(`/chat/${match.id}`)}>
+                            <img src={match.img} alt={match.name} className="match-card-img" />
+                            <div className="match-card-overlay">
+                                <span className="match-card-name">{match.name}, {match.age}</span>
+                                <p className="match-card-bio">{match.bio}</p>
                             </div>
-                            <div className="message-content">
-                                <div className="message-header">
-                                    <span className="message-name">{msg.name}</span>
-                                    <span className="message-time">{msg.time}</span>
-                                </div>
-                                <p className="message-preview" style={{ fontWeight: msg.unread ? '700' : '400', color: msg.unread ? 'white' : 'var(--text-secondary)' }}>
-                                    {msg.lastMessage}
-                                </p>
-                            </div>
-                            {msg.unread && <div className="unread-dot"></div>}
                         </div>
                     ))}
                 </div>
@@ -106,12 +140,18 @@ const Matches = () => {
                     </svg>
                     <span>Matches</span>
                 </button>
-                <button className="nav-item" onClick={() => navigate('/profile-wizard')}>
+                <button className="nav-item" onClick={() => navigate('/messages')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                     </svg>
-                    <span>Profile</span>
+                    <span>Messages</span>
+                </button>
+                <button className="nav-item" onClick={() => navigate('/love-stories')} title="Stories">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Stories</span>
                 </button>
             </nav>
         </div>

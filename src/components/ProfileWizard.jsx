@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import './ProfileWizard.css';
 
 // Icons
+// ... (icons remain unchanged, I will submit a targeted replacement for the imports and the useEffect logic)
+
 const IconBack = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -68,9 +70,31 @@ const SAVE_KEY = "profile_wizard_data_v2";
 
 export default function ProfileWizard() {
   const navigate = useNavigate();
+  const locationState = useLocation();
+  const [searchParams] = useSearchParams();
+
   // View State: 1 = Create, 2 = Profile View, 3 = Location Settings
-  const [view, setView] = useState(1);
+  const [view, setView] = useState(() => {
+    // Check query params first (highest priority for deep links)
+    if (searchParams.get('view') === 'profile') {
+      return 2;
+    }
+    // Then check location state (legacy/internal nav)
+    if (locationState.state && locationState.state.view) {
+      return locationState.state.view;
+    }
+    return localStorage.getItem(SAVE_KEY) ? 2 : 1;
+  });
   const [isEditing, setIsEditing] = useState(false);
+
+  // Force view update if query param or state changes
+  useEffect(() => {
+    if (searchParams.get('view') === 'profile') {
+      setView(2);
+    } else if (locationState.state && locationState.state.view) {
+      setView(locationState.state.view);
+    }
+  }, [locationState, searchParams]);
 
   // Data State
   const [name, setName] = useState("");
@@ -224,7 +248,7 @@ export default function ProfileWizard() {
         {/* Photos */}
         <div className="form-group">
           <label className="form-label">Showcase Your Work</label>
-          <p className="photo-upload-desc">Add a profile picture and photos of your best work (up to 5).</p>
+          <p className="photo-upload-desc">Add a profile picture and photos of your best work (up to 6).</p>
 
           <div className="photo-grid-row">
             {/* Add Button */}
@@ -323,7 +347,9 @@ export default function ProfileWizard() {
       <div className="wizard-header">
         <button className="back-btn" onClick={() => setView(1)}><IconBack /></button>
         <span className="header-title">Profile</span>
-        <button className="back-btn"><IconEllipsis /></button>
+        <button className="back-btn" onClick={toggleEdit} style={{ color: isEditing ? 'var(--primary)' : 'inherit' }}>
+          {isEditing ? <span style={{ fontSize: '14px', fontWeight: 600 }}>Save</span> : <IconPencil />}
+        </button>
       </div>
 
       {/* Photos Grid */}
@@ -337,7 +363,20 @@ export default function ProfileWizard() {
             {photos[index] ? (
               <>
                 <img src={photos[index].url} alt={`Photo ${index + 1}`} />
-                <div className="photo-overlay"><IconCamera /></div>
+                {isEditing ? (
+                  <button
+                    className="remove-photo-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removePhoto(photos[index].id);
+                    }}
+                    style={{ top: '8px', right: '8px', width: '28px', height: '28px', background: 'rgba(239, 68, 68, 0.9)' }}
+                  >
+                    <IconX />
+                  </button>
+                ) : (
+                  <div className="photo-overlay"><IconCamera /></div>
+                )}
               </>
             ) : (
               <div className="empty-slot-content">
@@ -360,12 +399,49 @@ export default function ProfileWizard() {
 
       {/* Info */}
       <div className="profile-info">
-        <h1 className="profile-name">{name || "Alexandra Chen"}{age ? `, ${age}` : ""}</h1>
-        <p className="profile-role">{location || "New York, NY"}</p>
-
-        <button className="edit-profile-btn" onClick={toggleEdit}>
-          <IconPencil /> {isEditing ? "Save Profile" : "Edit Profile"}
-        </button>
+        {isEditing ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', marginBottom: '16px' }}>
+            <input
+              type="text"
+              className="form-input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Full Name"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+            />
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <input
+                type="date"
+                className="form-input"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+                placeholder="Date of Birth"
+                style={{ flex: 1, colorScheme: 'dark' }}
+              />
+              <input
+                type="text"
+                className="form-input"
+                value={age}
+                readOnly
+                placeholder="Age"
+                style={{ width: '60px', textAlign: 'center', opacity: 0.7, cursor: 'not-allowed' }}
+                title="Age is calculated from DOB"
+              />
+            </div>
+            <input
+              type="text"
+              className="form-input"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="City, State"
+            />
+          </div>
+        ) : (
+          <>
+            <h1 className="profile-name">{name || "Alexandra Chen"}{age ? `, ${age}` : ""}</h1>
+            <p className="profile-role">{location || "New York, NY"}</p>
+          </>
+        )}
       </div>
 
       {/* About Me */}
@@ -495,11 +571,24 @@ export default function ProfileWizard() {
 
       {/* Map Preview */}
       <div className="map-preview">
-        {/* Placeholder for map image - using a colored div with text for now */}
-        <div style={{ width: '100%', height: '100%', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.3 }}>
-          <span style={{ color: 'white' }}>Map View</span>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+          <div style={{
+            width: 64,
+            height: 64,
+            borderRadius: '50%',
+            background: 'rgba(6, 182, 212, 0.15)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--primary)',
+            boxShadow: '0 0 0 4px rgba(6, 182, 212, 0.05)'
+          }}>
+            <IconMapPin />
+          </div>
+          <span style={{ color: 'var(--text-secondary)', fontSize: 13, fontWeight: 500 }}>
+            Interactive Map Preview
+          </span>
         </div>
-        {/* In a real app, this would be a Google Map or similar */}
       </div>
 
       <div className="location-options">
