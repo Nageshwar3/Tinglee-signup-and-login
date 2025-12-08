@@ -89,45 +89,46 @@ const LoveStories = () => {
                     <div key={story.id} className="story-card" onClick={() => openStory(story)}>
                         <div className="story-image">
                             <img src={story.image} alt={story.couple} />
+                            <button
+                                className={`card-like-btn ${story.isLiked ? 'liked' : ''}`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleLike(story.id);
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill={story.isLiked ? "currentColor" : "none"} stroke={story.isLiked ? "none" : "currentColor"} strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
                         </div>
                         <div className="story-content">
                             <h3>{story.couple}</h3>
                             <p className="story-date">{story.date}</p>
                             <p className="story-text">{story.story}</p>
-                            <div className="card-footer">
-                                <span className="read-time">{story.readTime || '3 min read'}</span>
-                                <button
-                                    className={`card-like-btn ${story.isLiked ? 'liked' : ''}`}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        toggleLike(story.id);
-                                    }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill={story.isLiked ? "currentColor" : "none"} stroke={story.isLiked ? "none" : "currentColor"} strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                </button>
-                            </div>
+                            {/* Card Footer Removed */}
                         </div>
                     </div>
+
                 ))}
             </div>
 
-            {selectedStory && (
-                <div className="story-modal-overlay" onClick={closeStory}>
-                    <div className="story-modal-content" onClick={e => e.stopPropagation()}>
-                        <button className="close-modal-btn" onClick={closeStory}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        </button>
-                        <div className="modal-image">
-                            <img src={selectedStory.image} alt={selectedStory.couple} />
-                        </div>
-                        <div className="modal-details">
-                            <h2>{selectedStory.couple}</h2>
-                            <p className="modal-date">{selectedStory.date}</p>
-                            <p className="modal-text">{selectedStory.story}</p>
+            {
+                selectedStory && (
+                    <div className="story-modal-overlay" onClick={closeStory}>
+                        <div className="story-modal-content" onClick={e => e.stopPropagation()}>
+                            <button className="close-modal-btn" onClick={closeStory}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                            <div className="modal-image">
+                                <img src={selectedStory.image} alt={selectedStory.couple} />
+                            </div>
+                            <div className="modal-details">
+                                <h2>{selectedStory.couple}</h2>
+                                <p className="modal-date">{selectedStory.date}</p>
+                                <p className="modal-text">{selectedStory.story}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             <div className="admin-link-container">
                 <button className="text-link" onClick={() => navigate('/admin')}>Admin Panel (Demo)</button>
@@ -168,7 +169,7 @@ const LoveStories = () => {
                     <span>Stories</span>
                 </button>
             </nav>
-        </div>
+        </div >
     );
 };
 

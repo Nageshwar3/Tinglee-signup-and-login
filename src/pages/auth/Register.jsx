@@ -11,12 +11,39 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [gender, setGender] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [showOtp, setShowOtp] = useState(false);
+  const [otp, setOtp] = useState(["", "", "", ""]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert("Registered Successfully!");
-    navigate("/profile-wizard");
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    // Instead of finishing immediately, we show OTP
+    setShowOtp(true);
+  }
+
+  function handleVerifyOtp() {
+    const enteredOtp = otp.join("");
+    if (enteredOtp.length === 4) {
+      alert("Registered Successfully!");
+      navigate("/profile-wizard");
+    } else {
+      alert("Please enter a valid 4-digit OTP");
+    }
+  }
+
+  function handleOtpChange(element, index) {
+    if (isNaN(element.value)) return;
+
+    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+
+    if (element.value && element.nextSibling) {
+      element.nextSibling.focus();
+    }
   }
 
   return (
@@ -27,57 +54,90 @@ export default function Register() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <input
-            className="field"
-            type="text"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          />
+          {!showOtp ? (
+            <>
+              <input
+                className="field"
+                type="text"
+                placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+              />
 
-          <input
-            className="field"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+              <input
+                className="field"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
-          <input
-            className="field"
-            type="tel"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
+              <input
+                className="field"
+                type="tel"
+                placeholder="Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
 
-          <input
-            className="field"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+              <input
+                className="field"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
 
-          <select
-            className="field"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            required
-          >
-            <option value="">Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
+              <input
+                className="field"
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
 
-          <button type="submit" className="primary-btn">
-            Sign Up
-          </button>
+              <button type="submit" className="primary-btn">
+                Sign Up
+              </button>
+            </>
+          ) : (
+            <div style={{ marginTop: '20px' }}>
+              <p className="otp-message">Enter the 4-digit code sent to your Email/Phone</p>
+              <div className="otp-container">
+                {otp.map((data, index) => {
+                  return (
+                    <input
+                      className="otp-digit"
+                      type="text"
+                      name="otp"
+                      maxLength="1"
+                      key={index}
+                      value={data}
+                      onChange={(e) => handleOtpChange(e.target, index)}
+                      onFocus={(e) => e.target.select()}
+                    />
+                  );
+                })}
+              </div>
+              <button type="button" onClick={handleVerifyOtp} className="primary-btn">
+                Verify
+              </button>
+              <div className="resend-link" onClick={() => alert("OTP Resent!")}>
+                Resend Code
+              </div>
+              <div
+                style={{ marginTop: '15px', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '14px' }}
+                onClick={() => setShowOtp(false)}
+              >
+                Back to Signup
+              </div>
+            </div>
+          )}
 
           <div className="or-divider">OR</div>
 

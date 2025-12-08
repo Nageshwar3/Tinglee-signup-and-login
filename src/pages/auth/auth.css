@@ -146,3 +146,46 @@
   outline: 2px solid rgba(0, 149, 246, 0.12);
   outline-offset: 2px;
 }
+
+/* OTP Styling */
+.otp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.otp-digit {
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  border-radius: 8px;
+  outline: none;
+  font-weight: bold;
+}
+
+.otp-digit:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(233, 64, 87, 0.4);
+  /* Assuming primary is reddish/pinkish */
+}
+
+.otp-message {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.resend-link {
+  font-size: 13px;
+  color: var(--primary);
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-block;
+  font-weight: 500;
+}
