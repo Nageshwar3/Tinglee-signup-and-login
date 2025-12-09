@@ -370,7 +370,7 @@ export default function ProfileWizard() {
                       e.stopPropagation();
                       removePhoto(photos[index].id);
                     }}
-                    style={{ top: '8px', right: '8px', width: '28px', height: '28px', background: 'rgba(239, 68, 68, 0.9)' }}
+                    style={{ top: '8px', right: '8px', width: '28px', height: '28px', background: 'rgba(239, 68, 68, 1)' }}
                   >
                     <IconX />
                   </button>
@@ -424,8 +424,7 @@ export default function ProfileWizard() {
                 value={age}
                 readOnly
                 placeholder="Age"
-                style={{ width: '60px', textAlign: 'center', opacity: 0.7, cursor: 'not-allowed' }}
-                title="Age is calculated from DOB"
+                style={{ width: '100px', textAlign: 'center', opacity: 0.7, cursor: 'not-allowed' }}
               />
             </div>
             <input
@@ -553,7 +552,7 @@ export default function ProfileWizard() {
             saveData();
             navigate('/discovery');
           }}>
-            Save Profile <span style={{ marginLeft: 8 }}>→</span>
+            Save Profile <span style={{ marginLeft: 8, display: 'inline-flex' }}><IconArrowRight /></span>
           </button>
         )}
       </div>
@@ -576,12 +575,12 @@ export default function ProfileWizard() {
             width: 64,
             height: 64,
             borderRadius: '50%',
-            background: 'rgba(6, 182, 212, 0.15)',
+            background: 'var(--bg-input)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: 'var(--primary)',
-            boxShadow: '0 0 0 4px rgba(6, 182, 212, 0.05)'
+            boxShadow: 'none'
           }}>
             <IconMapPin />
           </div>

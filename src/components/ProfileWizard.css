@@ -1,15 +1,14 @@
 /* Global & Reset */
 :root {
-  --bg-dark: #0d1117;
-  --bg-card: #161b22;
-  --bg-input: #1f2937;
-  --primary: #06b6d4;
-  /* Cyan Blue */
-  --primary-hover: #0891b2;
-  --text-main: #ffffff;
-  --text-secondary: #94a3b8;
-  --border-color: #374151;
-  --danger: #ef4444;
+  --bg-dark: #121212;
+  --bg-card: #1E1E1E;
+  --bg-input: #2C2C2C;
+  --primary: #F43F5E;
+  --primary-gradient: linear-gradient(90deg, #F43F5E 0%, #FB7185 100%);
+  --text-main: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --border-color: #2C2C2C;
+  --danger: #EF4444;
 }
 
 .profile-wizard {
@@ -126,18 +125,21 @@
 .form-input {
   width: 100%;
   background-color: var(--bg-input);
-  border: 1px solid transparent;
-  border-radius: 24px;
-  /* Pill shape inputs */
-  padding: 16px 20px;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 16px;
   color: var(--text-main);
   font-size: 15px;
+  font-weight: 400;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .form-input:focus {
-  border-color: var(--primary);
+  background-color: #383838;
+  box-shadow: none;
 }
 
 .form-input::placeholder {
@@ -147,16 +149,20 @@
 /* Date Input Specifics for Mobile Visibility */
 input[type="date"].form-input {
   color-scheme: dark;
-  /* Ensures browser UI (calendar/text) is light on dark bg */
   min-height: 52px;
-  /* Consistent height */
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  text-align: left;
+  flex-grow: 1;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
-  /* Make the calendar icon white */
   cursor: pointer;
   opacity: 0.6;
 }
@@ -254,8 +260,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .photo-circle.add:hover {
-  border-color: var(--primary);
-  background-color: rgba(6, 182, 212, 0.1);
+  border-color: #ec4899;
+  background-color: rgba(236, 72, 153, 0.1);
 }
 
 .photo-circle.filled img {
@@ -330,19 +336,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   pointer-events: auto;
   width: 100%;
   max-width: 440px;
-  background-color: var(--primary);
+  background: var(--primary-gradient);
   color: white;
   border: none;
-  padding: 16px;
-  border-radius: 30px;
+  padding: 14px;
+  border-radius: 20px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: opacity 0.2s;
+  box-shadow: none;
 }
 
 .bottom-bar button:hover {
-  background-color: var(--primary-hover);
+  opacity: 0.9;
+  transform: none;
+  box-shadow: none;
 }
 
 /* ===== PROFILE VIEW (Step 2/3) ===== */
@@ -358,31 +367,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .profile-photos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 20px;
+  gap: 16px;
+  padding: 24px;
 }
 
 /* Entry Animations */
-@keyframes slideInUp {
-  from {
+@keyframes popInStagger {
+  0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(0.8) translateY(20px);
   }
 
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
   }
 }
 
 .photo-slot {
   aspect-ratio: 1;
-  border-radius: 16px;
+  border-radius: 24px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-  animation: slideInUp 0.5s ease-out backwards;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: popInStagger 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .photo-slot img {
@@ -417,26 +428,49 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .photo-slot:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  z-index: 5;
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .empty-slot-content {
   width: 100%;
   height: 100%;
-  background: #2a3b55;
+  background: #27272a;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
-  transition: background 0.3s, color 0.3s;
+  color: #71717a;
+  transition: all 0.2s;
+  border-radius: 24px;
+  backdrop-filter: none;
+}
+
+.empty-slot-content svg {
+  animation: breathe 3s infinite ease-in-out;
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
 .photo-slot:hover .empty-slot-content {
-  background: #374151;
-  color: var(--primary);
+  background: #383838;
+  color: #71717A;
+  border-color: transparent;
 }
 
 .photo-overlay {
@@ -513,7 +547,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transform: translateY(-2px) scale(1.02);
   box-shadow:
     0 8px 15px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(6, 182, 212, 0.3),
+    0 0 0 1px rgba(236, 72, 153, 0.3),
     0 1px 3px rgba(255, 255, 255, 0.1) inset;
   background: linear-gradient(145deg, #374151, #2a3b55);
 }
@@ -600,8 +634,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .edit-icon-btn:hover {
-  color: var(--primary);
-  background-color: rgba(6, 182, 212, 0.1);
+  color: #ec4899;
+  background-color: rgba(236, 72, 153, 0.1);
   border-radius: 50%;
   animation: wiggle 0.5s ease-in-out forwards;
 }
@@ -628,10 +662,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 500;
 }
 
-.tag-pill.highlight {
-  background-color: rgba(6, 182, 212, 0.15);
-  color: var(--primary);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+.tag-pill.highlight,
+.tag-pill {
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  border: none;
 }
 
 /* Prompts */
