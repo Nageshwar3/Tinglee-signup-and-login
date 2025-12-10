@@ -1,72 +1,72 @@
- /* Import the Pacifico font for the logo */
- @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+/* Import the Pacifico font for the logo */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
- :root {
-   --bg-dark: #0d1117;
-   --bg-card: #161b22;
-   --primary: #ff4b7d;
-   --primary-gradient: linear-gradient(45deg, #ff4b7d, #ff6b6b);
-   --text-main: #ffffff;
-   --text-secondary: #94a3b8;
-   --border-color: #374151;
-   --danger: #ef4444;
-   --star: #3b82f6;
-   --success: #22c55e;
+:root {
+  --bg-dark: #000000;
+  --bg-card: #121212;
+  --primary: #ff4b7d;
+  --primary-gradient: linear-gradient(45deg, #ff4b7d, #ff6b6b);
+  --text-main: #ffffff;
+  --text-secondary: #94a3b8;
+  --border-color: #374151;
+  --danger: #ef4444;
+  --star: #3b82f6;
+  --success: #22c55e;
 
-   /* Legacy/Compat variables mapped to dark theme */
-   --bg: var(--bg-dark);
-   --card: var(--bg-card);
-   --muted: var(--text-secondary);
-   --input-bg: var(--bg-card);
- }
+  /* Legacy/Compat variables mapped to dark theme */
+  --bg: var(--bg-dark);
+  --card: var(--bg-card);
+  --muted: var(--text-secondary);
+  --input-bg: var(--bg-card);
+}
 
- html,
- body,
- #root {
-   height: 100%;
- }
+html,
+body,
+#root {
+  height: 100%;
+}
 
- * {
-   box-sizing: border-box;
- }
+* {
+  box-sizing: border-box;
+}
 
- /* Global Scrollbar Hide */
- ::-webkit-scrollbar {
-   display: none;
- }
+/* Global Scrollbar Hide */
+::-webkit-scrollbar {
+  display: none;
+}
 
- * {
-   scrollbar-width: none;
-   -ms-overflow-style: none;
- }
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
- body {
-   margin: 0;
-   padding: 0;
-   background: var(--bg);
-   font-family: Inter, Arial, Helvetica, sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   color: #222;
- }
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-main);
+}
 
- /* Global fix for date inputs on mobile dark mode */
- input[type="date"] {
-   color-scheme: dark;
-   min-height: 52px;
-   /* Ensure touch target size */
-   color: var(--text-main);
-   background-color: var(--input-bg);
- }
+/* Global fix for date inputs on mobile dark mode */
+input[type="date"] {
+  color-scheme: dark;
+  min-height: 52px;
+  /* Ensure touch target size */
+  color: var(--text-main);
+  background-color: var(--input-bg);
+}
 
- input[type="date"]::-webkit-calendar-picker-indicator {
-   filter: invert(1);
-   cursor: pointer;
-   opacity: 0.7;
- }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.7;
+}
 
- input[type="date"]::placeholder {
-   color: var(--text-secondary);
-   opacity: 1;
-   /* Firefox */
- }
+input[type="date"]::placeholder {
+  color: var(--text-secondary);
+  opacity: 1;
+  /* Firefox */
+}

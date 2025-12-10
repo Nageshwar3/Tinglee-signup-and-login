@@ -14,7 +14,7 @@ const LandingPage = () => {
                 </div>
                 <div className="nav-links">
                     <a href="#home">Home</a>
-                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
                     <a href="#how-it-works">How It Works</a>
                     <a href="#download">Download App</a>
                 </div>
@@ -32,10 +32,134 @@ const LandingPage = () => {
                         Connect with like-minded individuals and discover meaningful relationships in a safe, engaging environment.
                     </p>
                     <div className="hero-ctas">
-                        <button className="cta-primary" onClick={() => navigate('/register')}>Create Account</button>
+                        <button className="cta-primary" onClick={() => navigate('/register')}>Get Started</button>
                     </div>
                 </div>
             </header>
+
+            {/* About / Mission Section */}
+            <section className="section-about" id="about">
+                <div className="about-content">
+                    <div className="about-text">
+                        <h2 className="section-title-left">About Tinglee</h2>
+                        <p className="about-description">
+                            Tinglee is a modern dating platform designed to help people create meaningful connections in a fast, intuitive, and safe environment. Built with a user-first approach, we focus on real conversations, genuine interactions, and smarter matching powered by thoughtful design.
+                        </p>
+
+                        <div className="vm-wrapper">
+                            <div className="vm-block">
+                                <h3>Our Vision</h3>
+                                <p>To redefine online dating by blending smart technology with human-centric design, enabling authentic relationships to form naturally and safely.</p>
+                            </div>
+                            <div className="vm-block">
+                                <h3>Our Mission</h3>
+                                <p>To build a platform where every interaction feels real, respectful, and engaging—empowering users to discover connections that inspire lasting relationships.</p>
+                            </div>
+                        </div>
+
+                        <div className="why-built-block">
+                            <h3>Why We Built Tinglee</h3>
+                            <p>Dating today can feel overwhelming—too many choices, low-quality matches, and confusing interfaces. Tinglee was created to solve these problems by valuing transparency, genuine connections, and effortless usability.</p>
+                            <ul className="principles-list">
+                                <li>Meeting people shouldn’t be complicated.</li>
+                                <li>Profiles should reflect real personalities.</li>
+                                <li>Matching should feel natural, not forced.</li>
+                                <li>Safety should never be optional.</li>
+                            </ul>
+                        </div>
+
+                        <div className="future-block">
+                            <h3>The Future of Tinglee</h3>
+                            <p>We are expanding with innovative features like advanced compatibility scoring, real-time recommendations, enhanced safety verification, AI-powered conversation starters, and event-based meetups.</p>
+                            <p className="future-goal">Our long-term goal is to make Tinglee the most trusted platform for building meaningful relationships globally.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* What Makes Tinglee Different Section */}
+            <section className="section-why-tinglee">
+                <div className="why-content">
+                    <div className="why-text">
+                        <h2 className="section-title">What Makes Tinglee Different</h2>
+                        <ul className="why-list">
+                            <li>
+                                <span className="why-icon">❤️</span>
+                                <div>
+                                    <h4>Designed for Real Connections</h4>
+                                    <p>Tinglee goes beyond simple swipes. Every profile highlights personality, interests, prompts, and photos.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span className="why-icon">🎯</span>
+                                <div>
+                                    <h4>Smart & Relevant Matching</h4>
+                                    <p>Our algorithm focuses on compatibility, shared interests, and vibe, improving the quality of every interaction.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span className="why-icon">✨</span>
+                                <div>
+                                    <h4>Clean, Modern & Easy-to-Use</h4>
+                                    <p>A fresh, minimal design where every screen is optimized for speed, clarity, and smooth interactions.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span className="why-icon">🛡️</span>
+                                <div>
+                                    <h4>Safety First</h4>
+                                    <p>We prioritize trust through profile verification, reporting tools, and privacy-focused data handling.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span className="why-icon">🚀</span>
+                                <div>
+                                    <h4>Engaging Features</h4>
+                                    <p>From Discovery Cards and Profile Prompts to our distraction-free Chat System.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            {/* Our Promise to Users Section */}
+            <section className="section-community">
+                <div className="community-header">
+                    <h2 className="section-title">Our Promise to Users</h2>
+                    <p className="section-subtitle">Tinglee is committed to delivering:</p>
+                </div>
+                <div className="community-grid">
+                    <div className="community-card">
+                        <div className="community-icon-wrapper">
+                            <span className="community-icon">🤝</span>
+                        </div>
+                        <h3>Respectful Environment</h3>
+                        <p>A respectful and inclusive space for everyone.</p>
+                    </div>
+                    <div className="community-card">
+                        <div className="community-icon-wrapper">
+                            <span className="community-icon">✨</span>
+                        </div>
+                        <h3>Authentic Profiles</h3>
+                        <p>High-quality, verified profiles you can trust.</p>
+                    </div>
+                    <div className="community-card">
+                        <div className="community-icon-wrapper">
+                            <span className="community-icon">🔒</span>
+                        </div>
+                        <h3>Privacy Protection</h3>
+                        <p>Strong privacy and safety measures for your peace of mind.</p>
+                    </div>
+                    <div className="community-card">
+                        <div className="community-icon-wrapper">
+                            <span className="community-icon">📈</span>
+                        </div>
+                        <h3>Continual Improvement</h3>
+                        <p>We evolve based on your feedback. Every update is designed with you in mind.</p>
+                    </div>
+                </div>
+            </section>
 
             {/* How It Works Section */}
             <section className="section-how-it-works" id="how-it-works">
@@ -62,52 +186,6 @@ const LandingPage = () => {
                         <p>Let our AI suggest the best compatible matches for you.</p>
                     </div>
                 </div>
-            </section>
-
-            {/* Feature Highlights Section */}
-            <section className="section-features" id="features">
-                <h2 className="section-title">Feature Highlights</h2>
-                <div className="features-grid">
-                    <div className="feature-card">
-                        <span className="feature-icon">🧠</span>
-                        <h3>Smart Match Algorithm</h3>
-                        <p>Intelligent matching based on your behavior.</p>
-                    </div>
-                    <div className="feature-card">
-                        <span className="feature-icon">🎨</span>
-                        <h3>Profile Customization</h3>
-                        <p>Express yourself with images and bio.</p>
-                    </div>
-                    <div className="feature-card">
-                        <span className="feature-icon">📍</span>
-                        <h3>Location-Based</h3>
-                        <p>Find matches in your area.</p>
-                    </div>
-                    <div className="feature-card">
-                        <span className="feature-icon">💬</span>
-                        <h3>Instant Messaging</h3>
-                        <p>Chat with emojis and reactions.</p>
-                    </div>
-                    <div className="feature-card">
-                        <span className="feature-icon">🚀</span>
-                        <h3>Premium Boost</h3>
-                        <p>Get more visibility with Spotlight.</p>
-                    </div>
-                    <div className="feature-card">
-                        <span className="feature-icon">🛡️</span>
-                        <h3>Safety Tools</h3>
-                        <p>Block and report for a safe experience.</p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Security & Trust Section */}
-            <section className="section-security">
-                <div className="security-badge">
-                    <span className="shield-icon">🛡️</span>
-                    <h3>Verified & Secure</h3>
-                </div>
-                <p>Your privacy is our priority. We use end-to-end encryption and offer full profile control settings to keep your data safe.</p>
             </section>
 
             {/* Download App Section */}

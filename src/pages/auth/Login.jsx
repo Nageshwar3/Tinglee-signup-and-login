@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
+import { validatePassword } from "../../utils/passwordValidation";
 
 import logo from "../../assets/tinglee_logo.svg";
 
@@ -12,9 +13,20 @@ export default function Login() {
   const [view, setView] = useState("login"); // 'login' | 'verify-otp' | 'forgot-request' | 'forgot-reset'
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [newPassword, setNewPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   function handleLogin(e) {
     e.preventDefault();
+
+    const validation = validatePassword(password);
+    if (!validation.isValid) {
+      setPasswordError(validation.message);
+      return;
+    }
+    setPasswordError("");
+
     // Instead of logging in immediately, we show OTP
     setOtp(["", "", "", ""]);
     setView("verify-otp");
@@ -51,6 +63,13 @@ export default function Login() {
       alert("Please enter a new password");
       return;
     }
+
+    const validation = validatePassword(newPassword);
+    if (!validation.isValid) {
+      setPasswordError(validation.message);
+      return;
+    }
+    setPasswordError("");
     // Simulate reset
     alert("Password Reset Successfully! Please Login.");
     setPassword("");
@@ -87,14 +106,28 @@ export default function Login() {
                 required
               />
 
-              <input
-                className="field"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="password-container">
+                <input
+                  className="field"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                  )}
+                </span>
+              </div>
+              {passwordError && view === 'login' && (
+                <p style={{ color: "red", fontSize: "12px", marginTop: "5px", marginBottom: "5px" }}>
+                  {passwordError}
+                </p>
+              )}
 
               <p className="forgot-password" onClick={() => setView('forgot-request')}>
                 Forgot Password?
@@ -186,14 +219,27 @@ export default function Login() {
                 })}
               </div>
 
-              <input
-                className="field"
-                type="password"
-                placeholder="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                style={{ marginTop: '20px' }}
-              />
+              <div className="password-container" style={{ marginTop: '20px' }}>
+                <input
+                  className="field"
+                  type={showNewPassword ? "text" : "password"}
+                  placeholder="New Password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <span className="eye-icon" onClick={() => setShowNewPassword(!showNewPassword)}>
+                  {showNewPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                  )}
+                </span>
+              </div>
+              {passwordError && (
+                <p style={{ color: "red", fontSize: "12px", marginTop: "5px", marginBottom: "5px" }}>
+                  {passwordError}
+                </p>
+              )}
 
               <button type="button" onClick={handleResetPassword} className="primary-btn">
                 Reset Password

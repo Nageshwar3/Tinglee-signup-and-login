@@ -52,6 +52,37 @@
   outline: none;
 }
 
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container .field {
+  padding-right: 40px;
+  /* Make space for the eye icon */
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  /* Center vertically */
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  /* Adjust based on input margin-top if needed, input has 10px margin-top */
+}
+
+/* Specific adjustment because field has margin-top: 10px */
+.password-container .eye-icon {
+  top: calc(50% + 5px);
+  /* Offset by half of margin-top (10px/2) to center in the INPUT part */
+}
+
 /* right-aligned small link (forgot) */
 .forgot-password {
   text-align: right;

@@ -1,13 +1,16 @@
 /* Global & Reset */
 :root {
-  --bg-dark: #121212;
-  --bg-card: #1E1E1E;
-  --bg-input: #2C2C2C;
+  --bg-dark: #000000;
+  /* Pure Black */
+  --bg-card: #0a0a0a;
+  /* Deepest Gray */
+  --bg-input: #141414;
+  /* Dark Input */
   --primary: #F43F5E;
   --primary-gradient: linear-gradient(90deg, #F43F5E 0%, #FB7185 100%);
   --text-main: #FFFFFF;
   --text-secondary: #A1A1AA;
-  --border-color: #2C2C2C;
+  --border-color: #1f1f1f;
   --danger: #EF4444;
 }
 
