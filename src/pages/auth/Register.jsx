@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { validatePassword } from "../../utils/passwordValidation";
+import api from "../../api/client";
 
-import logo from "../../assets/tinglee_logo.svg";
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Register() {
   const [showOtp, setShowOtp] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
@@ -33,19 +34,31 @@ export default function Register() {
       return;
     }
     setPasswordError("");
-    setPasswordError("");
-    // Instead of finishing immediately, we show OTP
-    setShowOtp(true);
+    try {
+      // Direct Registration (No OTP)
+      const response = await api.post('/auth/register', {
+        fullName,
+        email,
+        phone,
+        password
+      });
+
+      if (response.data.success) {
+        alert("Registered Successfully! Please Login.");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Register Error:", error);
+      if (error.code === "ERR_NETWORK") {
+        alert("Network Error: Cannot connect to Backend. Is it running on port 4000?");
+      } else {
+        alert(error.response?.data?.message || `Registration Failed: ${error.message}`);
+      }
+    }
   }
 
   function handleVerifyOtp() {
-    const enteredOtp = otp.join("");
-    if (enteredOtp.length === 4) {
-      alert("Registered Successfully!");
-      navigate("/login");
-    } else {
-      alert("Please enter a valid 4-digit OTP");
-    }
+    // OTP logic retained if needed later
   }
 
   function handleOtpChange(element, index) {
@@ -62,7 +75,7 @@ export default function Register() {
     <div className="auth-wrapper">
       <div className="auth-box">
         <div className="brand-container">
-          <img src={logo} alt="Tinglee Logo" className="brand-logo" />
+          <span className="brand-name">tinglee</span>
         </div>
 
         <form onSubmit={handleSubmit}>

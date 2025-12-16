@@ -47,40 +47,15 @@ const ProfileDetails = ({ profile, onClose, onLike, onPass, isOwnProfile = false
                         </div>
 
                         {/* New Fields: Job, School, etc. */}
-                        <div className="details-info-grid">
-                            {profile.job && profile.company && (
-                                <div className="info-row">
-                                    <span className="info-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                                    </span>
-                                    <span className="info-text">{profile.job} at {profile.company}</span>
-                                </div>
-                            )}
-                            {profile.school && (
-                                <div className="info-row">
-                                    <span className="info-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                                    </span>
-                                    <span className="info-text">{profile.school}</span>
-                                </div>
-                            )}
-                            {profile.smoking && (
-                                <div className="info-row">
-                                    <span className="info-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
-                                    </span>
-                                    <span className="info-text">{profile.smoking}</span>
-                                </div>
-                            )}
-                            {profile.lookingFor && (
-                                <div className="info-row">
-                                    <span className="info-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                    </span>
-                                    <span className="info-text">{profile.lookingFor}</span>
-                                </div>
-                            )}
-                        </div>
+                        {/* About Me Section */}
+                        {profile.bio && (
+                            <div className="details-section" style={{ marginTop: '24px' }}>
+                                <span className="label-small">About Me</span>
+                                <p className="value-text" style={{ marginTop: '8px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>
+                                    {profile.bio}
+                                </p>
+                            </div>
+                        )}
                     </div>
 
                     {/* Prompts Section */}

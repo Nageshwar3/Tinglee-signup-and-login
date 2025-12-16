@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
+
+
 const LandingPage = () => {
     const navigate = useNavigate();
 
@@ -10,7 +12,7 @@ const LandingPage = () => {
             {/* Navbar */}
             <nav className="landing-nav">
                 <div className="nav-logo">
-                    Tinglee<span className="heart-icon">❤️</span>
+                    <span>tinglee</span>
                 </div>
                 <div className="nav-links">
                     <a href="#home">Home</a>

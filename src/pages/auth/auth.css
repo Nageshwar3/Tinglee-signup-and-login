@@ -39,6 +39,17 @@
   display: block;
 }
 
+.brand-name {
+  font-size: 32px;
+  font-weight: 800;
+  margin-left: 10px;
+  letter-spacing: -1px;
+  background: linear-gradient(90deg, #7c3aed, #ff4b7d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* inputs and selects */
 .auth-box .field {
   width: 100%;

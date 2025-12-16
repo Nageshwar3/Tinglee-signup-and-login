@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { validatePassword } from "../../utils/passwordValidation";
+import api from "../../api/client";
 
-import logo from "../../assets/tinglee_logo.svg";
+
 
 export default function Login() {
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState("");
   const [password, setPassword] = useState("");
 
-  const [view, setView] = useState("login"); // 'login' | 'verify-otp' | 'forgot-request' | 'forgot-reset'
+  const [view, setView] = useState("login"); // 'login' | 'forgot-request' | 'forgot-reset'
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [newPassword, setNewPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
 
     const validation = validatePassword(password);
@@ -27,19 +28,38 @@ export default function Login() {
     }
     setPasswordError("");
 
-    // Instead of logging in immediately, we show OTP
-    setOtp(["", "", "", ""]);
-    setView("verify-otp");
+    try {
+      // Direct Login (No OTP)
+      // Ensure backend returns { success: true, token: "..." }
+      const response = await api.post('/auth/login', {
+        identifier: userInput,
+        password: password
+      });
+
+      if (response.data.success && response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        if (response.data.user) {
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+        }
+        alert("Login Successful");
+        navigate("/profile-wizard", { state: { view: 1 } });
+      } else {
+        // Fallback if backend still enforces OTP
+        alert("Login initiated. (Backend might still expect OTP, check console)");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      if (error.code === "ERR_NETWORK") {
+        alert("Network Error: Cannot connect to Backend. Is it running on port 4000?");
+      } else {
+        alert(error.response?.data?.message || `Login Failed: ${error.message}`);
+      }
+    }
   }
 
+  // OTP handlers retained for Forgot Password flow or future use
   function handleVerifyOtp() {
-    const enteredOtp = otp.join("");
-    if (enteredOtp.length === 4) {
-      alert("Login Successful");
-      navigate("/profile-wizard", { state: { view: 1 } });
-    } else {
-      alert("Please enter a valid 4-digit OTP");
-    }
+    // ... logic if needed later
   }
 
   function handleSendResetOtp() {
@@ -91,7 +111,7 @@ export default function Login() {
     <div className="auth-wrapper">
       <div className="auth-box">
         <div className="brand-container">
-          <img src={logo} alt="Tinglee Logo" className="brand-logo" />
+          <span className="brand-name">tinglee</span>
         </div>
 
         <form onSubmit={handleLogin}>

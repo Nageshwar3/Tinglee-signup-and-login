@@ -86,19 +86,28 @@ html {
 }
 
 .nav-logo {
-    font-weight: 800;
-    font-size: 32px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    color: var(--text-white);
+    gap: 12px;
+    font-weight: 800;
+    font-size: 32px;
     letter-spacing: -1px;
 }
 
-.heart-icon {
-    color: var(--neon-pink);
-    filter: drop-shadow(0 0 5px var(--neon-pink));
+.nav-logo span {
+    background: linear-gradient(90deg, #7c3aed, #ff4b7d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
+.nav-logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* .heart-icon removed as it is part of the svg now */
 
 .nav-links {
     display: flex;
