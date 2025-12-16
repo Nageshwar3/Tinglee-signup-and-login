@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { validatePassword } from "../../utils/passwordValidation";
-import api from "../../api/client";
+
 
 
 
@@ -34,26 +34,17 @@ export default function Register() {
       return;
     }
     setPasswordError("");
+    // Simulate successful registration without backend
     try {
-      // Direct Registration (No OTP)
-      const response = await api.post('/auth/register', {
-        fullName,
-        email,
-        phone,
-        password
-      });
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (response.data.success) {
-        alert("Registered Successfully! Please Login.");
-        navigate("/login");
-      }
+      alert("Registered Successfully! (Simulated) Please Login.");
+      navigate("/login");
+
     } catch (error) {
       console.error("Register Error:", error);
-      if (error.code === "ERR_NETWORK") {
-        alert("Network Error: Cannot connect to Backend. Is it running on port 4000?");
-      } else {
-        alert(error.response?.data?.message || `Registration Failed: ${error.message}`);
-      }
+      alert("Registration Failed");
     }
   }
 

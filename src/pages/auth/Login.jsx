@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { validatePassword } from "../../utils/passwordValidation";
-import api from "../../api/client";
+
 
 
 
@@ -28,32 +28,26 @@ export default function Login() {
     }
     setPasswordError("");
 
+    // Simulate successful login without backend
     try {
-      // Direct Login (No OTP)
-      // Ensure backend returns { success: true, token: "..." }
-      const response = await api.post('/auth/login', {
-        identifier: userInput,
-        password: password
-      });
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (response.data.success && response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        if (response.data.user) {
-          localStorage.setItem('user', JSON.stringify(response.data.user));
-        }
-        alert("Login Successful");
-        navigate("/profile-wizard", { state: { view: 1 } });
-      } else {
-        // Fallback if backend still enforces OTP
-        alert("Login initiated. (Backend might still expect OTP, check console)");
-      }
+      const mockUser = {
+        id: "user_123",
+        name: "Test User",
+        email: userInput
+      };
+
+      localStorage.setItem('token', 'mock-jwt-token-123456');
+      localStorage.setItem('user', JSON.stringify(mockUser));
+
+      alert("Login Successful (Simulated)");
+      navigate("/profile-wizard", { state: { view: 1 } });
+
     } catch (error) {
-      console.error("Login Error:", error);
-      if (error.code === "ERR_NETWORK") {
-        alert("Network Error: Cannot connect to Backend. Is it running on port 4000?");
-      } else {
-        alert(error.response?.data?.message || `Login Failed: ${error.message}`);
-      }
+      console.error("Login Simulation Error:", error);
+      alert("Login Failed");
     }
   }
 
